@@ -1,0 +1,16 @@
+.root {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--foreground) 12%, transparent);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+}
