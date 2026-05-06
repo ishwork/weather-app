@@ -1,0 +1,11 @@
+.next
+out
+build
+node_modules
+coverage
+.vercel
+package-lock.json
+*.min.js
+.next/cache
+AGENTS.md
+CLAUDE.md
