@@ -1,11 +1,18 @@
 "use client";
 
-import styles from "./status-page.module.scss";
+import styles from "@/app/status-page.module.scss";
 
 const ErrorPage = () => {
   return (
     <div className={styles.root}>
-      <p className={styles.title}>Something went wrong.</p>
+      <h1 className={styles.title}>Something went wrong!</h1>
+      <button
+        type="button"
+        className={styles.statusAction}
+        onClick={() => window.location.reload()}
+      >
+        Try again
+      </button>
     </div>
   );
 };

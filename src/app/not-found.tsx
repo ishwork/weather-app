@@ -1,24 +1,24 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
 
-import styles from "./status-page.module.scss";
-
-export const metadata: Metadata = {
-  title: "Page not found",
-};
+import styles from "@/app/status-page.module.scss";
 
 const NotFound = () => {
+  useEffect(() => {
+    document.title = "Page not found";
+  }, []);
+
   return (
     <div className={styles.root}>
       <h1 className={styles.title}>Page not found</h1>
       <p className={styles.message}>
         The page you’re looking for doesn’t exist or may have been moved.
       </p>
-      <div className={styles.actions}>
-        <Link href="/" className={styles.button}>
-          Back home
-        </Link>
-      </div>
+      <Link href="/" className={styles.statusAction}>
+        Return Home
+      </Link>
     </div>
   );
 };
