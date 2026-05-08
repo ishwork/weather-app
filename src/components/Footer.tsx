@@ -1,9 +1,11 @@
-import styles from "./Footer.module.scss";
+import styles from "@/components/Footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer className={styles.root}>
-      <p className={styles.note}>Built with Next.js</p>
+    <footer className={styles.root} data-testid="site-footer">
+      <p className={styles.note} data-testid="footer-note">
+        Built with Next.js
+      </p>
     </footer>
   );
 };
