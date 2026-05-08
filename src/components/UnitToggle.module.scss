@@ -1,0 +1,36 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+  border-radius: 999px;
+  overflow: hidden;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.option {
+  padding: 0.25rem 0.625rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+
+  &:hover:not(.active) {
+    color: color-mix(in srgb, var(--foreground) 70%, transparent);
+    background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  }
+}
+
+.active {
+  color: var(--background);
+  background: var(--foreground);
+  cursor: default;
+}
