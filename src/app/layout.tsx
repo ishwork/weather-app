@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import "@/app/globals.scss";
 import styles from "@/app/layout.module.scss";
@@ -37,6 +38,7 @@ const RootLayout = ({
           <main className={styles.content}>{children}</main>
           <Footer />
         </UnitProvider>
+        <Analytics />
       </body>
     </html>
   );
