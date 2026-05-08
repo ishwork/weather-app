@@ -1,0 +1,298 @@
+/* Status panel for loading, error, and no location */
+.statusPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  }
+}
+
+/* Weather card */
+.card {
+  width: 100%;
+  max-width: 28rem;
+  min-width: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem;
+
+  @media (min-width: 992px) {
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Location */
+.locationRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.location {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  color: color-mix(in srgb, var(--foreground) 75%, transparent);
+
+  @media (min-width: 992px) {
+    font-size: 1rem;
+  }
+}
+
+.localTime {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+
+  &::before {
+    content: "·";
+    margin-right: 0.5rem;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 0.875rem;
+  }
+}
+
+/* Hero: big temp + icon + condition */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  @media (min-width: 992px) {
+    gap: 1.25rem;
+  }
+}
+
+.temp {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+
+  @media (min-width: 992px) {
+    font-size: 3rem;
+  }
+}
+
+.heroMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.icon {
+  font-size: 1.75rem;
+  line-height: 1;
+
+  @media (min-width: 992px) {
+    font-size: 2.25rem;
+  }
+}
+
+.condition {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  @media (min-width: 992px) {
+    font-size: 1rem;
+  }
+}
+
+.feelsLike {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
+/* Details row for weather details */
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+
+  @media (min-width: 992px) {
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+.detailLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Section wrapper for hourly and daily forecast */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+}
+
+/* Horizontal scroll: wrapper establishes scrollport; table stays width: max-content */
+/* touch-action: pan-x — vertical pans starting here don't scroll the page */
+.hourlyTableScroll {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-x;
+  user-select: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+/* Next-12-hours forecast — one column per local hour */
+.hourlyTable {
+  border-collapse: collapse;
+  width: max-content;
+  max-width: none;
+
+  tbody tr:not(:first-child) {
+    th,
+    td {
+      border-top: 1px solid color-mix(in srgb, var(--foreground) 6%, transparent);
+    }
+  }
+}
+
+.hourlyTable th,
+.hourlyTable td {
+  padding: 0.375rem 0.75rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.hourlyTime {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
+.hourlyIcon {
+  font-size: 1.125rem;
+  line-height: 1;
+
+  @media (min-width: 992px) {
+    font-size: 1.375rem;
+  }
+}
+
+.hourlyTemp {
+  font-weight: 600;
+}
+
+.hourlyPrecip {
+  color: inherit;
+}
+
+/* 7-day forecast table */
+.forecastTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.forecastHead th {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+  padding-bottom: 0.375rem;
+  text-align: center;
+
+  &:first-child {
+    text-align: left;
+  }
+}
+
+.forecastTable td {
+  padding: 0.375rem 0;
+  text-align: center;
+  font-size: 0.8125rem;
+}
+
+.forecastToday td {
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
+
+  &:first-child {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  &:last-child {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+}
+
+.forecastLabel {
+  font-size: 0.6875rem !important;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--foreground) 60%, transparent);
+  text-align: left !important;
+}
+
+.forecastIcon {
+  font-size: 1.125rem;
+  line-height: 1;
+
+  @media (min-width: 992px) {
+    font-size: 1.375rem;
+  }
+}
+
+.forecastHigh {
+  font-weight: 600;
+}
+
+.forecastLow {
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+}
