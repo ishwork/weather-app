@@ -8,7 +8,9 @@ import styles from "@/components/WeatherView/WeatherView.module.scss";
 
 import DailyForecast from "@/components/WeatherView/DailyForecast";
 import HourlyForecast from "@/components/WeatherView/HourlyForecast";
+import Loading from "@/components/Loading";
 import LocationHeader from "@/components/WeatherView/LocationHeader";
+import Status from "@/components/Status";
 import WeatherDetails from "@/components/WeatherView/WeatherDetails";
 import WeatherHero from "@/components/WeatherView/WeatherHero";
 
@@ -19,37 +21,12 @@ const WeatherView = ({ city }: { city?: string }) => {
   const params: WeatherParams | null = city ? { city } : coords;
   const { weatherData, loading, error } = useWeather(params);
 
-  if (!city && !coords && !geoError) {
-    return (
-      <div className={styles.statusPanel}>
-        <p>Requesting your location…</p>
-      </div>
-    );
-  }
-
-  if (!city && geoError) {
-    return (
-      <div className={styles.statusPanel}>
-        <p>{geoError}</p>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className={styles.statusPanel}>
-        <p>Loading weather…</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.statusPanel}>
-        <p>{error}</p>
-      </div>
-    );
-  }
+  if (!city && !coords && !geoError)
+    return <Loading message="Requesting your location ..." />;
+  if (!city && geoError) return <Status message={geoError} />;
+  if (loading)
+    return <Loading message="Loading weather data for your location ..." />;
+  if (error) return <Status message={error} />;
 
   if (!weatherData) return null;
 

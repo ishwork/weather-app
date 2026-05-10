@@ -1,7 +1,7 @@
 import type { HourlyWeather } from "@/types/weather";
 import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
 import {
-  formatHour,
+  formatHourlyTime,
   formatPrecipitation,
   formatTemp,
   getIcon,
@@ -40,7 +40,7 @@ const HourlyForecast = ({
                   scope="col"
                   className={styles.hourlyTime}
                 >
-                  {formatHour(hourly.time[slotIndex])}
+                  {formatHourlyTime(hourly.time[slotIndex])}
                 </th>
               ))}
             </tr>

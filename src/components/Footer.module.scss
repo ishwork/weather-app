@@ -17,3 +17,12 @@
   opacity: 0.8;
   text-align: center;
 }
+
+.link {
+  color: inherit;
+  text-underline-offset: 0.125em;
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -110,12 +110,12 @@ export const formatLocalTime = (utcOffsetSeconds: number) => {
   });
 };
 
-export const formatHour = (isoTime: string) =>
-  new Intl.DateTimeFormat("en-US", {
+export const formatHourlyTime = (isoTime: string) =>
+  new Date(isoTime).toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
-  }).format(new Date(`${isoTime}:00`));
+  });
 
 /**
  * Hourly `is_day` from Open-Meteo (`1` daylight / `0` night), aligned with `hourly.time`.

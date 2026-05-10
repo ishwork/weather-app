@@ -26,7 +26,10 @@ const useGeolocation = (city?: string) => {
           lat: pos.coords.latitude,
           lon: pos.coords.longitude,
         }),
-      () => setGeoError("Location access denied. Search for a city above."),
+      () =>
+        setGeoError(
+          "Location access denied. Search for a city in the search box.",
+        ),
     );
   }, [city]);
 

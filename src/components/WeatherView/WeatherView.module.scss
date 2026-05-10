@@ -14,6 +14,57 @@
   }
 }
 
+/* Loading card: centered spinner + message */
+.loadingCard {
+  width: 100%;
+  max-width: 28rem;
+  min-width: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+
+  @media (min-width: 992px) {
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Loading spinner ring (drawn on ::before) */
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: "";
+    flex-shrink: 0;
+    width: 2.375rem;
+    height: 2.375rem;
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+    border-top-color: color-mix(in srgb, var(--foreground) 62%, transparent);
+    animation: loadingSpinnerSpin 0.75s linear infinite;
+  }
+}
+
+@keyframes loadingSpinnerSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingMessage {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
 /* Weather card */
 .card {
   width: 100%;
@@ -200,7 +251,8 @@
   tbody tr:not(:first-child) {
     th,
     td {
-      border-top: 1px solid color-mix(in srgb, var(--foreground) 6%, transparent);
+      border-top: 1px solid
+        color-mix(in srgb, var(--foreground) 6%, transparent);
     }
   }
 }

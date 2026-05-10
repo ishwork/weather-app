@@ -4,11 +4,15 @@ import { describe, expect, it } from "vitest";
 import Footer from "@/components/Footer";
 
 describe("Footer", () => {
-  it("renders footer note", () => {
+  it("renders Open-Meteo attribution", () => {
     render(<Footer />);
     expect(screen.getByTestId("site-footer")).toBeInTheDocument();
     expect(screen.getByTestId("footer-note")).toHaveTextContent(
-      "Built with Next.js",
+      "(open-meteo.com)",
+    );
+    expect(screen.getByTestId("footer-link")).toHaveAttribute(
+      "href",
+      "https://open-meteo.com/",
     );
   });
 });

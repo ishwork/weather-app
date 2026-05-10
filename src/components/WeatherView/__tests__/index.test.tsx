@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import WeatherView from "@/components/WeatherView";
+import { mockWeatherData } from "@/test/mock-data/weather";
 import { UnitProvider } from "@/contexts/UnitContext";
 import useGeolocation from "@/hooks/useGeolocation";
 import useWeather from "@/hooks/useWeather";
-import { mockWeatherData } from "@/test/mock-data/weather";
+
+import WeatherView from "@/components/WeatherView";
 
 vi.mock("@/hooks/useGeolocation", () => ({
   default: vi.fn(),
@@ -38,7 +39,9 @@ describe("WeatherView", () => {
       error: null,
     });
     renderView();
-    expect(screen.getByText("Requesting your location…")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "Requesting your location",
+    );
   });
 
   it("shows loading state for a city search", () => {
@@ -52,7 +55,9 @@ describe("WeatherView", () => {
       error: null,
     });
     renderView("Helsinki");
-    expect(screen.getByText("Loading weather…")).toBeInTheDocument();
+    expect(
+      screen.getByText("Loading weather data for your location ..."),
+    ).toBeInTheDocument();
   });
 
   it("shows fetch error", () => {
