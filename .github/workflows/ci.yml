@@ -1,0 +1,57 @@
+# Continuous integration for master: ESLint, Next.js build, npm audit, then Vitest.
+
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+# New pushes cancel in-progress runs only for this branch/PR (others keep running).
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  npm-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js 20.19
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.19"
+          cache: "npm"
+      # Cache npm dependencies to speed up installs
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ./node_modules
+            ~/.npm
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            node-modules-
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+      # Restore Next.js compile cache (build always runs; cache only speeds it up)
+      - name: Cache Next.js build cache
+        id: cache-next-build
+        uses: actions/cache@v4
+        with:
+          path: ./.next/cache
+          key: next-build-${{ hashFiles('package-lock.json', 'next.config.js') }}
+          restore-keys: |
+            next-build-
+      - name: Run ESLint
+        run: npm run eslint
+      - name: Build
+        run: npm run build
+      - name: Run dependency audit
+        run: npm run test:audit
+      - name: Run tests
+        run: npm run test:react
