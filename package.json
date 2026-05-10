@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "eslint": "eslint",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test:react": "vitest run",
+    "test:watch": "vitest",
+    "test:audit": "npm audit --audit-level=high"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
